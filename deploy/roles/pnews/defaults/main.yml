@@ -1,0 +1,9 @@
+---
+git_repo: https://github.com/jorisroovers/pnews.git
+git_version: HEAD
+
+pnews_group: "pnews"
+pnews_user: "pnews"
+pnews_dir: /opt/pnews
+pnews_web_dir: "{{pnews_dir}}/web"
+pnews_web_systemd_config: "/etc/systemd/system/pnews-web.service"

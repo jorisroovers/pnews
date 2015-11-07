@@ -1,0 +1,13 @@
+[Service]
+WorkingDirectory={{pnews_web_dir}}
+ExecStart=/usr/bin/node app.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=pnews-web
+User={{pnews_user}}
+Group={{pnews_group}}
+Environment='NODE_ENV=production'
+
+[Install]
+WantedBy=multi-user.target
