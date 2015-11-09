@@ -6,6 +6,18 @@ nicely.
 
 **At this point pnews is still very limited in functionality, just getting started!**
 
+Currently the only news source is [reddit.com/r/programming](https://reddit.com/r/programming).
+
+The Architecture of pnews is based on a number of microservices (actually, "nanoservice" might be more appropriate):
+- pnews-web: webinterface
+- pnews-poller: polls news from reddit
+
+The services interact with each other as follows:
+```
+pnews-web <=  mongo-db  <= pnews-poller <= reddit
+```
+
+
 # Why? #
 
 Because I can :-)
@@ -17,6 +29,7 @@ Also, because I want to play around with some new technologies:
 
 # Getting started #
 
+## pnews-web ##
 To run the web app:
 ```bash
 cd web
@@ -30,6 +43,14 @@ cd web
 npm install
 sudo npm install -g forever
 forever -w app.js
+```
+
+## pnews-poller ##
+To run the poller app:
+```bash
+cd poller
+npm install
+node app.js
 ```
 
 # Deploying #
