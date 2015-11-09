@@ -1,0 +1,8 @@
+{
+  "name": "pnews-poller",
+  "version": "0.1.0",
+  "dependencies": {
+    "q": "^1.4.1",
+    "request": "^2.65.0"
+  }
+}
