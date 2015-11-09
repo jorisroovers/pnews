@@ -5,9 +5,11 @@
 - name: Creating pnews user
   user: name={{pnews_user}} group={{pnews_group}} state=present
 
-- name: "Installing some convencience utilities (system)"
+- name: "Installing some convenience utilities (system)"
   apt: name={{item}} state=present
   with_items:
+    - git
+    - python-setuptools # Installs easy_install
     - vim
     - silversearcher-ag
 
@@ -31,6 +33,8 @@
 - name: "Cloning pnews from git"
   git: repo={{git_repo}} dest={{pnews_dir}} version={{git_version}}
   notify: restart pnews-web
+  tags:
+    - gitclone
 
 - name: "Installing pnews dependencies using npm"
   npm: path={{pnews_web_dir}}

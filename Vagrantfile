@@ -12,12 +12,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.cache.scope = :box
     end
 
-    config.vm.box = "ubuntu/trusty64"
+    config.vm.box = "ubuntu/wily64"
 
-    config.vm.define "pnews-dev", primary: true do |pnews|
+    config.vm.define "pnews", primary: true do |pnews|
         pnews.vm.synced_folder ".", SHARED_DIR
         # auto jump to shared dir on log in
         pnews.vm.provision "shell", inline: "echo 'cd #{SHARED_DIR}' >> /home/vagrant/.bashrc"
+
+        pnews.vm.provision "ansible", playbook: "deploy/site.yml", sudo: true, skip_tags: "gitclone"
 
     end
 
