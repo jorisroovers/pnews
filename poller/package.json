@@ -2,6 +2,7 @@
   "name": "pnews-poller",
   "version": "0.1.0",
   "dependencies": {
+    "mongodb": "^2.0.48",
     "q": "^1.4.1",
     "request": "^2.65.0"
   }

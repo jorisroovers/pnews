@@ -1,0 +1,7 @@
+---
+- name: "Installing MongoDB package"
+  apt: name=mongodb state=present
+  notify: restart mongodb
+
+- lineinfile: dest={{mongo_db_conf}} regexp=^bind_ip line="bind_ip = {{mongo_db_bind_ip}}"
+  notify: restart mongodb

@@ -1,5 +1,6 @@
 var Q = require("q");
 var request = require('request');
+var MongoClient = require('mongodb').MongoClient
 
 var VERSION = "0.0.1"
 var USER_AGENT = " pnews-poller:v" + VERSION;
@@ -74,7 +75,7 @@ function poll() {
 
 function init() {
     // Check whether all required variables are set
-    var envVariables = ['REDDIT_USERNAME', 'REDDIT_PASSWORD', 'REDDIT_APP_ID', 'REDDIT_APP_TOKEN'];
+    var envVariables = ['REDDIT_USERNAME', 'REDDIT_PASSWORD', 'REDDIT_APP_ID', 'REDDIT_APP_TOKEN', 'MONGO_DB_URL'];
     var initError = false;
     envVariables.forEach(function (item) {
         if (!process.env[item]) {
@@ -89,6 +90,17 @@ function init() {
         process.exit(1)
     }
 }
+
+// Use connect method to connect to the Server
+MongoClient.connect(process.env.MONGO_DB_URL, function (err, db) {
+    if (err) {
+        console.error("ERROR", err);
+        return
+    }
+    console.log("Connected correctly to server");
+
+    db.close();
+});
 
 //////////////////
 // ENTRY POINT
