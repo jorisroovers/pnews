@@ -87,6 +87,7 @@ function poll() {
 }
 
 function init() {
+    console.info("Starting pnews-poller...")
     // Check whether all required variables are set
     var envVariables = ['REDDIT_USERNAME', 'REDDIT_PASSWORD', 'REDDIT_APP_ID', 'REDDIT_APP_TOKEN', 'MONGO_DB_URL'];
     var initError = false;

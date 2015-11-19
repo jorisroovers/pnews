@@ -1,3 +1,24 @@
 h1 {
     color: red;
 }
+
+.votes {
+    float: left;
+    width: 4em;
+    display: inline-block;
+}
+
+.title {
+    display: inline-block;
+}
+
+.title a {
+    display: block;
+    padding: 1em 0;
+}
+
+.post {
+    overflow: auto;
+    zoom: 1;
+    border-bottom: 1px solid;
+}

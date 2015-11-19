@@ -9,5 +9,13 @@ html
         //script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
     body
         h1= message
-        #content
-    script(src="js/main.js" type="text/babel")
+        //#content
+        #posts
+            each post in posts
+                .post
+                    .votes
+                        = post.data.ups
+                    .title
+                        a(href=post.data.url target="_blank")
+                            = post.data.title
+    //script(src="js/main.js" type="text/babel")

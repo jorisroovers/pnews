@@ -42,6 +42,8 @@ Web app development:
 cd web
 npm install
 sudo npm install -g forever
+export WEB_SERVER_PORT=3000
+export MONGO_DB_URL="mongodb://localhost:27017/pnews_poller"
 forever -w app.js
 ```
 
@@ -72,6 +74,7 @@ ansible-playbook --ask-pass deploy/site.yml -i deploy/inventory/raspberrypi
 # TODO #
 - Use browserify or webpack for ReactJS inclusion
 - Make ansible playbooks more modular so that the different components can be deployed to different servers
+- Better approach to logging?
 ## Nice to have ##
 - Serverspec/[testinfra](http://testinfra.readthedocs.org/en/latest/)/
   [envassert](https://pypi.python.org/pypi/envassert)
