@@ -1,4 +1,14 @@
 ---
+- hosts: pnews-web
+  roles:
+   - pnews-web
+
+- hosts: pnews-poller
+  roles:
+   - pnews-poller
+
+# Used by Vagrant
 - hosts: pnews
   roles:
-   - pnews
+   - pnews-web
+   - pnews-poller

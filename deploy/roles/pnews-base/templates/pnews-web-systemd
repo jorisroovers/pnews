@@ -8,6 +8,8 @@ SyslogIdentifier=pnews-web
 User={{pnews_user}}
 Group={{pnews_group}}
 Environment='NODE_ENV=production'
+Environment='WEB_SERVER_PORT={{pnews_web_port}}'
+Environment='MONGO_DB_URL={{pnews_web_mongo_url}}'
 
 [Install]
 WantedBy=multi-user.target

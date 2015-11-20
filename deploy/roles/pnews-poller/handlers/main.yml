@@ -1,0 +1,2 @@
+- name: restart pnews-poller
+  service: name=pnews-poller state=restarted

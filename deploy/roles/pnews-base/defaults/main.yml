@@ -1,0 +1,8 @@
+---
+git_repo: https://github.com/jorisroovers/pnews.git
+git_version: HEAD
+
+# pnews generic
+pnews_group: "pnews"
+pnews_user: "pnews"
+pnews_dir: /opt/pnews

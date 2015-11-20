@@ -1,2 +1,11 @@
-[pnews]
-192.168.0.28 ansible_sudo=yes ansible_ssh_user=pi
+[pnews-web]
+192.168.1.125 ansible_sudo=yes ansible_ssh_user=pi
+
+[pnews-web:vars]
+pnews_poller_reddit_username="{{ lookup('env','REDDIT_USERNAME') }}"
+pnews_poller_reddit_password="{{ lookup('env','REDDIT_PASSWORD') }}"
+pnews_poller_reddit_app_id="{{ lookup('env','REDDIT_APP_ID') }}"
+pnews_poller_reddit_app_token="{{ lookup('env','REDDIT_APP_TOKEN') }}"
+
+[pnews-poller]
+192.168.1.125 ansible_sudo=yes ansible_ssh_user=pi

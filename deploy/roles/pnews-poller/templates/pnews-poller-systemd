@@ -1,0 +1,18 @@
+[Service]
+WorkingDirectory={{pnews_poller_dir}}
+ExecStart=/usr/bin/node app.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=pnews-poller
+User={{pnews_user}}
+Group={{pnews_group}}
+Environment='NODE_ENV=production'
+Environment='MONGO_DB_URL={{pnews_poller_mongo_url}}'
+Environment='REDDIT_USERNAME={{pnews_poller_reddit_username}}'
+Environment='REDDIT_PASSWORD={{pnews_poller_reddit_password}}'
+Environment='REDDIT_APP_ID={{pnews_poller_reddit_app_id}}'
+Environment='REDDIT_APP_TOKEN={{pnews_poller_reddit_app_token}}'
+
+[Install]
+WantedBy=multi-user.target

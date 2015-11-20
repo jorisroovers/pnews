@@ -1,0 +1,17 @@
+---
+- name: "Cloning pnews from git"
+  git: repo={{git_repo}} dest={{pnews_dir}} version={{git_version}}
+  notify: restart pnews-web
+  tags:
+    - gitclone
+
+- name: "Installing pnews dependencies using npm"
+  npm: path={{pnews_web_dir}}
+  notify: restart pnews-web
+
+- name: "Installing pnews-web service"
+  template: src="pnews-web-systemd" dest="{{pnews_web_systemd_config}}"
+  notify: restart pnews-web
+
+- name: "Enabling pnews-web at boot time"
+  service: name=pnews-web enabled=yes

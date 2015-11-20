@@ -1,7 +1,9 @@
 ---
+# Use force=yes to deal with unauthenticated packages on the raspberry
 - name: "Installing MongoDB package"
-  apt: name=mongodb state=present
+  apt: name=mongodb state=present force=yes
   notify: restart mongodb
 
-- lineinfile: dest={{mongo_db_conf}} regexp=^bind_ip line="bind_ip = {{mongo_db_bind_ip}}"
+- name: "Configuring MongoDB to bind to external IP"
+  lineinfile: dest={{mongo_db_conf}} regexp=^bind_ip line="bind_ip = {{mongo_db_bind_ip}}"
   notify: restart mongodb

@@ -1,0 +1,6 @@
+---
+# pnews-web
+pnews_web_dir: "{{pnews_dir}}/web"
+pnews_web_systemd_config: "/etc/systemd/system/pnews-web.service"
+pnews_web_port: 3001
+pnews_web_mongo_url: "mongodb://localhost:27017/pnews"
