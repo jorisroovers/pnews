@@ -1,24 +1,63 @@
-h1 {
-    color: red;
+.top-bar {
+    background-color: #165a89;
+    color: white;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.top-bar-right div {
+    display: inline-block;
+    padding: 0 0.5em;
 }
 
 .votes {
     float: left;
     width: 4em;
     display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 1em 0 0.3em 0;
 }
 
 .title {
-    display: inline-block;
+    margin-left: 4em;
 }
 
 .title a {
     display: block;
-    padding: 1em 0;
+    padding: 1em 0 0.3em 0;
 }
 
 .post {
     overflow: auto;
     zoom: 1;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #ccc;
+}
+
+.post .info {
+    padding: 0 0 0.3em 0em;
+}
+
+.post .info div {
+    display: inline-block;
+}
+
+.post .info .source {
+    width: 4em;
+    text-align: center;
+}
+
+.post .info .comments {
+    margin: 0 1em;
+}
+
+.source.reddit .pill {
+    font-size: 0.8em;
+    background-color: tomato;
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin: auto;
+    color: white;
+    display: inline;
 }
