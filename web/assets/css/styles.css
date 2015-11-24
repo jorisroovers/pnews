@@ -1,9 +1,31 @@
+
 .top-bar {
     background-color: #165a89;
     color: white;
     font-variant: small-caps;
     font-weight: bold;
     font-size: 1.2em;
+    padding: 0 0 0 1em;
+    line-height: 2.2em;
+}
+
+.top-bar .menu {
+    background-color: #165a89;
+
+}
+
+.top-bar .menu li {
+    padding: 0em 0.5em;
+    height: 2.2em;
+}
+
+.top-bar .menu li a {
+    color: white;
+}
+
+.top-bar .menu li.active {
+    background-color: #178ac8;
+
 }
 
 .top-bar-right div {
@@ -13,6 +35,7 @@
 
 .votes {
     float: left;
+    vertical-align: middle;
     width: 4em;
     display: inline-block;
     text-align: center;
@@ -50,14 +73,28 @@
 
 .post .info .comments {
     margin: 0 1em;
+    font-weight: bold;
 }
 
 .source.reddit .pill {
     font-size: 0.8em;
     background-color: tomato;
-    border-radius: 3px;
-    padding: 1px 4px;
+    border-radius: 0.3em;
+    padding: 0.1em 0.3em;
     margin: auto;
     color: white;
     display: inline;
+}
+
+/* Mobile media query */
+
+@media only screen and (max-device-width: 800px) {
+    html {
+        font-size: 40px;
+    }
+
+    .top-bar {
+        font-size: 1.5em;
+    }
+
 }

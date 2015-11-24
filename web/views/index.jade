@@ -14,12 +14,16 @@ html
                 div
                     = "pnews"
             .top-bar-right
-                div
-                    = "top:"
-                div
-                    = "day"
-                div
-                    = "week"
+                ul.menu
+                    li
+                        = "top:"
+                    li.active
+                        a
+                            = "day"
+                    li
+                        a
+                            = "week"
+
         //#content
         #posts
             each post in posts
@@ -34,6 +38,6 @@ html
                             div.pill
                                 = "reddit"
                         div.date= "May 23, 2015"
-                        div.comments= "comments"
+                        div.comments= "10 comments"
 
     //script(src="js/main.js" type="text/babel")
