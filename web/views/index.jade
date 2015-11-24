@@ -31,13 +31,15 @@ html
                     .votes
                         = post.data.ups
                     .title
-                        a(href=post.data.url target="_blank")
+                        a(href=post.data.url)
                             = post.data.title
                     .info
                         div.source.reddit
                             div.pill
                                 = "reddit"
-                        div.date= "May 23, 2015"
-                        div.comments= "10 comments"
+                        div.date= post.data.date_str
+                        div.comments
+                            a(href="https://reddit.com" + post.data.permalink)
+                                =  post.data.num_comments + " comments"
 
     //script(src="js/main.js" type="text/babel")

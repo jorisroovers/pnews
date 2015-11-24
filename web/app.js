@@ -1,5 +1,6 @@
 var express = require('express'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    moment = require('moment');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -14,7 +15,19 @@ app.get('/', function (req, res) {
             console.warn("Error while fetching reddit posts from the DB: ", err);
             res.render('index', {title: 'pnews', message: 'An error occurred while fetching the results from the DB'});
         } else {
-            res.render('index', {title: 'pnews', message: 'Pnews', posts: posts});
+            // Create human friendly date strings for each post
+            var now = moment.utc();
+            var filteredPosts = [];
+            for (var i = 0, len = posts.length; i < len; i++) {
+                var date = moment.unix(posts[i].data.created_utc);
+                var diff = moment.duration(now.diff(date)).days();
+                // only keep posts of the last day
+                if (diff < 1) {
+                    filteredPosts.push(posts[i]);
+                    posts[i].data.date_str = date.fromNow() + " (" + date.format("ddd, MMM Do YYYY, h:mm A") + ")";
+                }
+            }
+            res.render('index', {title: 'pnews', message: 'Pnews', posts: filteredPosts});
         }
     });
 
@@ -41,6 +54,7 @@ var server = app.listen(process.env.WEB_SERVER_PORT || 3000, function () {
             url: String,
             permalink: String,
             num_comments: Number,
+            created_utc: Number,
             ups: Number
         }
     }, {strict: false});
