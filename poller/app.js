@@ -117,6 +117,11 @@ function init() {
 
 }
 
+// Simple function that can be tested (to be removed)
+function foo() {
+    return "foo"
+}
+module.exports.foo = foo
 //////////////////
 // ENTRY POINT
 //////////////////
