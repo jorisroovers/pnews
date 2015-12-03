@@ -1,6 +1,7 @@
 var express = require('express'),
     mongoose = require('mongoose'),
-    moment = require('moment');
+    moment = require('moment'),
+    winston = require('winston');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -12,7 +13,7 @@ var RedditPost = null;
 app.get('/', function (req, res) {
     RedditPost.find().sort({'data.ups': -1}).exec(function (err, posts) {
         if (err) {
-            console.warn("Error while fetching reddit posts from the DB: ", err);
+            winston.warn("Error while fetching reddit posts from the DB: ", err);
             res.render('index', {title: 'pnews', message: 'An error occurred while fetching the results from the DB'});
         } else {
             // Create human friendly date strings for each post
@@ -34,7 +35,7 @@ app.get('/', function (req, res) {
 });
 
 var server = app.listen(process.env.WEB_SERVER_PORT || 3000, function () {
-    console.info("Starting pnews-web...");
+    winston.info("Starting pnews-web...");
     var host = server.address().address;
     var port = server.address().port;
 
@@ -60,5 +61,5 @@ var server = app.listen(process.env.WEB_SERVER_PORT || 3000, function () {
     }, {strict: false});
     RedditPost = mongoose.model('RedditPost', RedditPostSchema);
 
-    console.info('pnews listening at http://%s:%s', host, port);
+    winston.info('pnews listening at http://%s:%s', host, port);
 });

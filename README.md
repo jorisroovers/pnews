@@ -73,9 +73,7 @@ ansible-playbook --ask-pass deploy/site.yml -i deploy/inventory/raspberrypi
 
 # TODO #
 - Use browserify or webpack for ReactJS inclusion
-- Make ansible playbooks more modular so that the different components can be deployed to different servers
 - Switch to Sass for foundation
-- Better approach to logging?
 
 ## Nice to have ##
 - Serverspec/[testinfra](http://testinfra.readthedocs.org/en/latest/)/

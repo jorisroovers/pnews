@@ -5,7 +5,8 @@
     "mongodb": "^2.0.48",
     "mongoose": "^4.2.6",
     "q": "^1.4.1",
-    "request": "^2.65.0"
+    "request": "^2.65.0",
+    "winston": "^2.1.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

@@ -1,6 +1,7 @@
 var Q = require("q"),
     request = require('request'),
     mongoose = require('mongoose'),
+    winston = require('winston'),
     version = require('./version');
 
 
@@ -13,7 +14,6 @@ var URLS = {
     }
 };
 
-
 function Poller(options) {
 
     var self = {options: options};
@@ -22,7 +22,7 @@ function Poller(options) {
 
     // Simple way to get reddit access token as per: https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example
     self.get_access_token = function () {
-        console.info("Retrieving access code")
+        winston.info("Retrieving access code")
         data = {
             'grant_type': "password",
             'username': self.options.reddit_username,
@@ -36,7 +36,7 @@ function Poller(options) {
         request.post(URLS.reddit.access_token, {'auth': auth, 'form': data, 'json': true},
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
-                    console.info("Retrieved new access token");
+                    winston.info("Retrieved new access token");
                     _access_token = body["access_token"];
                     deferred.resolve();
                 }
@@ -46,7 +46,7 @@ function Poller(options) {
 
     // Polls /r/programming for the top stories
     self.poll = function () {
-        console.info("Polling reddit for latest programming news...")
+        winston.info("Polling reddit for latest programming news...")
         var options = {
             'url': URLS.reddit.r_programming_top,
             'auth': {'bearer': _access_token},
@@ -57,12 +57,12 @@ function Poller(options) {
         }
         request.get(options, function (error, response, body) {
             if (error) {
-                console.error("An error occurred while trying to poll reddit:", error);
+                winston.error("An error occurred while trying to poll reddit:", error);
                 return;
             }
             // if we are unauthenticated, then get a new token first and redo poll
             if (response.statusCode == 401) {
-                console.info("Access token expired, getting a new one...")
+                winston.info("Access token expired, getting a new one...")
                 self.get_access_token().then(self.poll);
             }
             else if (response.statusCode == 200) {
@@ -75,16 +75,16 @@ function Poller(options) {
                     _dbModel.update(query, postData, {upsert: true}, function (err) {
                         savedCount++;
                         if (err) {
-                            console.warn("Failed saving post: [%s] %s", post.data.title, post.data.title);
+                            winston.warn("Failed saving post: [%s] %s", post.data.title, post.data.title);
                         }
                         if (savedCount == body.data.children.length) {
-                            console.info("Saved posts to DB.")
+                            winston.info("Saved posts to DB.")
                         }
                     });
                 });
             }
             else {
-                console.warn("Unexpected response:", response.statusCode);
+                winston.warn("Unexpected response:", response.statusCode);
             }
         });
     };

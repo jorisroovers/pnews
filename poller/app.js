@@ -1,24 +1,25 @@
-var poller = require("./poller");
+var poller = require("./poller"),
+    winston = require('winston');
 var TIMEOUT = 10000;
 
 //////////////////
 // ENTRY POINT
 //////////////////
 
-console.info("Starting pnews-poller...")
+winston.info("Starting pnews-poller...")
 // Check whether all required variables are set
 var envVariables = ['REDDIT_USERNAME', 'REDDIT_PASSWORD', 'REDDIT_APP_ID', 'REDDIT_APP_TOKEN', 'MONGO_DB_URL'];
 var initError = false;
 envVariables.forEach(function (item) {
     if (!process.env[item]) {
-        console.error("The environment variable '%s' must be defined.", item);
+        winston.error("The environment variable '%s' must be defined.", item);
         initError = true;
     }
 });
 
 // exit if an init error occured
 if (initError) {
-    console.error("pnews-poller not correctly initialized, exiting.");
+    winston.error("pnews-poller not correctly initialized, exiting.");
     process.exit(1)
 }
 
