@@ -1,0 +1,2 @@
+---
+nginx_default_config: "/etc/nginx/sites-enabled/default"

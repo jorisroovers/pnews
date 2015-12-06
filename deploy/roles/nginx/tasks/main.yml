@@ -1,0 +1,7 @@
+---
+- name: "Installing nginx"
+  apt: name=nginx state=present
+  notify: restart nginx
+
+- name: "Removing default nginx config"
+  file: path="{{nginx_default_config}}" state=absent

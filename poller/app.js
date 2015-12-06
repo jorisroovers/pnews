@@ -1,6 +1,6 @@
 var poller = require("./poller"),
     winston = require('winston');
-var TIMEOUT = 10000;
+var TIMEOUT = 30000;
 
 //////////////////
 // ENTRY POINT

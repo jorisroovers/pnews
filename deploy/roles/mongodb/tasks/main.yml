@@ -1,4 +1,7 @@
 ---
+- name: "Updating apt-get cache"
+  apt: update_cache=yes cache_valid_time=3600
+
 # Use force=yes to deal with unauthenticated packages on the raspberry
 - name: "Installing MongoDB package"
   apt: name=mongodb state=present force=yes

@@ -11,7 +11,13 @@
 
 - name: "Installing pnews-web service"
   template: src="pnews-web-systemd" dest="{{pnews_web_systemd_config}}"
-  notify: restart pnews-web
+  notify:
+    - systemd daemon-reload
+    - restart pnews-web
+
+- name: "Installing pnews-web nginx proxy"
+  template: src="pnews-nginx-config" dest="{{pnews_web_nginx_config}}"
+  notify: restart nginx
 
 - name: "Enabling pnews-web at boot time"
   service: name=pnews-web enabled=yes

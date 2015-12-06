@@ -11,7 +11,10 @@
 
 - name: "Installing pnews-poller service"
   template: src="pnews-poller-systemd" dest="{{pnews_poller_systemd_config}}"
-  notify: restart pnews-poller
+  notify:
+    - systemd daemon-reload
+    - restart pnews-poller
+
 
 - name: "Enabling pnews-web at boot time"
   service: name=pnews-poller enabled=yes
