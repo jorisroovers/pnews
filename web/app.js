@@ -10,8 +10,10 @@ app.use(express.static('assets'));
 
 var RedditPost = null;
 
+
 app.get('/', function (req, res) {
-    RedditPost.find().sort({'data.ups': -1}).exec(function (err, posts) {
+    var minUpvotes = process.env.REDDIT_MIN_UPVOTES || 1;
+    RedditPost.find({'data.ups': {$gt: minUpvotes}}).sort({'data.ups': -1}).exec(function (err, posts) {
         if (err) {
             winston.warn("Error while fetching reddit posts from the DB: ", err);
             res.render('index', {title: 'pnews', message: 'An error occurred while fetching the results from the DB'});

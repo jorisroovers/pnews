@@ -6,3 +6,4 @@ pnews_web_nginx_config: "/etc/nginx/sites-enabled/pnews-web.conf"
 pnews_web_nginx_log: "/var/log/nginx/pnews-web.log"
 pnews_web_port: 3001
 pnews_web_mongo_url: "mongodb://localhost:27017/pnews"
+pnews_web_reddit_min_upvotes: 10

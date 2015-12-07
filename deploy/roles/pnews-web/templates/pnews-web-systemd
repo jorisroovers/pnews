@@ -10,6 +10,7 @@ Group={{pnews_group}}
 Environment='NODE_ENV=production'
 Environment='WEB_SERVER_PORT={{pnews_web_port}}'
 Environment='MONGO_DB_URL={{pnews_web_mongo_url}}'
+Environment='REDDIT_MIN_UPVOTES={{pnews_web_reddit_min_upvotes}}'
 
 [Install]
 WantedBy=multi-user.target
