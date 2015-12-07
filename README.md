@@ -71,10 +71,6 @@ ansible-playbook --ask-pass deploy/site.yml -i deploy/inventory/raspberrypi
 ```
 
 
-# TODO #
-- Use browserify or webpack for ReactJS inclusion
-- Switch to Sass for foundation
-
 ## Nice to have ##
 - Serverspec/[testinfra](http://testinfra.readthedocs.org/en/latest/)/
   [envassert](https://pypi.python.org/pypi/envassert)

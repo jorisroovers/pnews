@@ -1,0 +1,20 @@
+<div id="posts">
+    {{#each posts}}
+        <div class="post">
+            <div class="votes">{{this.data.ups}}</div>
+            <div class="title">
+                <a href="{{this.data.ups}}">{{this.data.title}}</a>
+            </div>
+            <div class="info">
+                <div class="source reddit">
+                    <div class="pill">reddit</div>
+                </div>
+                <div class="date">{{this.data.date_str}}</div>
+                <div class="comments">
+                    <a href="https://reddit.com{{this.data.permalink}}">{{this.data.num_comments}} comments</a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+<!--<script src="js/main.js" type="text/babel"/>-->

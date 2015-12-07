@@ -1,10 +1,13 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     moment = require('moment'),
-    winston = require('winston');
+    winston = require('winston'),
+    exphbs = require('express-handlebars');
+
 
 var app = express();
-app.set('view engine', 'jade');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 app.set('views', 'views');
 app.use(express.static('assets'));
 
@@ -30,7 +33,7 @@ app.get('/', function (req, res) {
                     posts[i].data.date_str = date.fromNow() + " (" + date.format("ddd, MMM Do YYYY, h:mm A") + ")";
                 }
             }
-            res.render('index', {title: 'pnews', message: 'Pnews', posts: filteredPosts});
+            res.render('home', {title: 'pnews', message: 'Pnews', posts: filteredPosts});
         }
     });
 
