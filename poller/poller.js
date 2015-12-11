@@ -16,8 +16,12 @@ var URLS = {
 
 function Poller(options) {
 
-    var self = {options: options};
-    var _access_token = "bogus"; // this MUST be set to a bogus token initially, otherwise the API returns HTML
+    var self = {
+        options: options,
+        // access_token MUST be set to a bogus token initially, otherwise the API returns HTML
+        access_token: options.access_token || "bogus"
+    };
+
     var _dbModel = null;
 
     // Simple way to get reddit access token as per: https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example
@@ -37,7 +41,7 @@ function Poller(options) {
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     winston.info("Retrieved new access token");
-                    _access_token = body["access_token"];
+                    self.access_token = body["access_token"];
                     deferred.resolve();
                 }
             });
@@ -49,7 +53,7 @@ function Poller(options) {
         winston.info("Polling reddit for latest programming news...")
         var options = {
             'url': URLS.reddit.r_programming_top,
-            'auth': {'bearer': _access_token},
+            'auth': {'bearer': self.access_token},
             'headers': {
                 'User-Agent': USER_AGENT
             },

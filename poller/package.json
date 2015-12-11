@@ -13,6 +13,7 @@
     "gulp-jasmine": "^2.2.1",
     "jasmine": "^2.3.2",
     "jasmine-core": "^2.3.4",
-    "jasmine-spec-reporter": "^2.4.0"
+    "jasmine-spec-reporter": "^2.4.0",
+    "nock": "^3.4.0"
   }
 }
