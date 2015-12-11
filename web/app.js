@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
                 // only keep posts of the last day
                 if (diff < 1) {
                     filteredPosts.push(posts[i]);
-                    posts[i].data.date_str = date.fromNow() + " (" + date.format("ddd, MMM Do YYYY, h:mm A") + ")";
+                    posts[i].data.date_str = date.fromNow();//  + " (" + date.format("ddd, MMM Do YYYY, h:mm A") + ")";
                 }
             }
             res.render('home', {title: 'pnews', message: 'Pnews', posts: filteredPosts});

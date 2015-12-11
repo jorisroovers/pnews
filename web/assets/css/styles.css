@@ -90,11 +90,25 @@
     display: inline;
 }
 
+.date {
+    width: 7em;
+}
+
 /* Mobile media query */
 
 @media only screen and (max-device-width: 800px) {
-    html {
-        font-size: 40px;
+
+    .top-bar-left {
+        float: left !important;
+    }
+
+    .top-bar-right {
+        float: right !important;
+        display: inline-block;
+    }
+
+    .comments {
+        float: right;
     }
 
     .top-bar {
