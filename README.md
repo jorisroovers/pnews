@@ -58,11 +58,11 @@ node app.js
 # Deploying #
 You can deploy pnews to a server using Ansible.
 
-The instructions below are for deploying pnews to a Raspberry Pi running Raspbian 8.0. While I expect that the
-automation works on any Ubuntu-based linux flavor, this hasn't been tested.
+The instructions below are for deploying pnews to Ubuntu 15.10. While I expect that the automation works on any recent
+Ubuntu-based linux flavor, this hasn't been tested.
 
-Also, for my own convenience, the default target host is set to a Raspberry running in my own local network.
-To change this, modify the IP address and credentials in ```deploy/inventory/raspberrypi```.
+An example inventory file can be found in deploy/inventory ```deploy/inventory/raspberrypi```, which I've used in
+the past to deploy pnews to a Raspberry Pi in my local network.
 
 NOTE: This deployment code is written for Ansible 1.x and might not work on Ansible 2.x.
 

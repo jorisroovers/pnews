@@ -105,8 +105,12 @@ function Poller(options) {
         // set strict: false so that we can just insert reddit posts without having to define the schema here
         var RedditPostSchema = mongoose.Schema({data: {id: {type: [String], index: true}}}, {strict: false});
         _dbModel = mongoose.model('RedditPost', RedditPostSchema);
-
     };
+
+    self.close = function () {
+        mongoose.disconnect();
+    };
+
     return self;
 }
 

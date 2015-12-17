@@ -1,4 +1,4 @@
-var TIMEOUT = 1200000, HN_MAX_FETCH_STORIES = 100;
+var HN_MAX_FETCH_STORIES = 100;
 
 var Q = require("q"),
     request = require('request'),
@@ -50,8 +50,10 @@ function HNPoller(options) {
                 // for each story-id, fetch story details
                 winston.info("Retrieving HN top stories...");
                 var topstories = body;
-                for (var i = 0; i < Math.min(HN_MAX_FETCH_STORIES, topstories.length); i++) {
-                    console.log("Retrieving details for story " + topstories[i]);
+                var savedStoryCount = 0;
+                var numStoriesToFetch = Math.min(HN_MAX_FETCH_STORIES, topstories.length);
+                for (var i = 0; i < numStoriesToFetch; i++) {
+                    winston.info("Retrieving details for story " + topstories[i]);
                     var options = {
                         'url': URLS.hn.story + topstories[i] + ".json",
                         'json': true,
@@ -66,11 +68,16 @@ function HNPoller(options) {
                                 winston.warn("Failed saving story: %s", story.id);
                             } else {
                                 winston.info("Saved story: (%s) %s", story.id, story.title);
+                                savedStoryCount++;
+                                if (savedStoryCount == numStoriesToFetch) {
+                                    winston.info("Saved all stories");
+                                    deferred.resolve();
+                                }
                             }
                         });
                     });
                 }
-                deferred.resolve();
+                winston.info("Fetched all stories");
             } else {
                 winston.warn("An error occured while fetching HN top stories: " + error);
             }
@@ -78,15 +85,11 @@ function HNPoller(options) {
         return deferred.promise;
     };
 
+    self.close = function () {
+        mongoose.disconnect();
+    };
+
     return self;
 };
 
-//TODO(joris.roovers): Poller interface that is shared between HN and reddit pollers
-
-var p = new HNPoller({mongo_db_url: process.env.MONGO_DB_URL});
-p.init();
-setInterval(function () {
-    p.poll();
-}, TIMEOUT);
-p.poll();
-
+module.exports.HNPoller = HNPoller;
