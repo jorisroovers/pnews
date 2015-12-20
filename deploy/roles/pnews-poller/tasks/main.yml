@@ -5,6 +5,9 @@
   tags:
     - gitclone
 
+- name: "Installing pnews-poller dependencies using npm"
+  npm: path={{pnews_poller_dir}}
+
 - name: "Creating pnews-poller log directory"
   file: path={{pnews_poller_log_dir}} state="directory"
         owner={{pnews_user}} group={{pnews_group}} mode=0755

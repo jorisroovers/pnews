@@ -5,7 +5,7 @@
   tags:
     - gitclone
 
-- name: "Installing pnews dependencies using npm"
+- name: "Installing pnews-web dependencies using npm"
   npm: path={{pnews_web_dir}}
   notify: restart pnews-web
 
