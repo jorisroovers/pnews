@@ -5,16 +5,25 @@
   tags:
     - gitclone
 
-- name: "Installing pnews dependencies using npm"
-  npm: path={{pnews_poller_dir}}
-  notify: restart pnews-poller
+- name: "Creating pnews-poller log directory"
+  file: path={{pnews_poller_log_dir}} state="directory"
+        owner={{pnews_user}} group={{pnews_group}} mode=0755
 
-- name: "Installing pnews-poller service"
-  template: src="pnews-poller-systemd" dest="{{pnews_poller_systemd_config}}"
-  notify:
-    - systemd daemon-reload
-    - restart pnews-poller
+- name: "Creating pnews-poller-reddit.sh"
+  template: src="pnews-poller-reddit.sh" dest="{{pnews_dir}}/pnews-poller-reddit.sh"
+            owner={{pnews_user}} group={{pnews_group}} mode=0755
 
+# Redirecting output to log file:
+# http://unix.stackexchange.com/questions/52330/how-to-redirect-output-to-a-file-from-within-cron
+# Cron jobs are kept in: /var/spool/cron/crontabs/pnews
+- name: "Adding cron job for pnews-poller-reddit.sh"
+  cron: name="pnews-poller-reddit" minute="*/1"
+        user={{pnews_user}} job="{{pnews_dir}}/pnews-poller-reddit.sh >> {{pnews_poller_reddit_log}} 2>&1"
 
-- name: "Enabling pnews-web at boot time"
-  service: name=pnews-poller enabled=yes
+- name: "Creating pnews-poller-hackernews.sh"
+  template: src="pnews-poller-hackernews.sh" dest="{{pnews_dir}}/pnews-poller-hackernews.sh"
+            owner={{pnews_user}} group={{pnews_group}} mode=0755
+
+- name: "Adding cron job for pnews-poller-hackernews.sh"
+  cron: name="pnews-poller-hackernews" minute="*/1"
+        user={{pnews_user}} job="{{pnews_dir}}/pnews-poller-hackernews.sh >> {{pnews_poller_hackernews_log}} 2>&1"

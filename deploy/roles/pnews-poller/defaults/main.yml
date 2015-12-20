@@ -1,7 +1,11 @@
 ---
 # pnews-poller
 pnews_poller_dir: "{{pnews_dir}}/poller"
-pnews_poller_systemd_config: "/etc/systemd/system/pnews-poller.service"
+
+pnews_poller_log_dir: "/var/log/pnews"
+pnews_poller_reddit_log: "{{pnews_poller_log_dir}}/pnews-poller-reddit.log"
+pnews_poller_hackernews_log: "{{pnews_poller_log_dir}}/pnews-poller-hackernews.log"
+
 pnews_poller_mongo_url: "mongodb://localhost:27017/pnews"
 pnews_poller_reddit_username: ""
 pnews_poller_reddit_password: ""
