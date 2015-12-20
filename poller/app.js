@@ -61,4 +61,5 @@ winston.info("Starting pnews-poller [%s]...", cli.source);
 p.init();
 p.poll().then(function () {
     p.close();
+    winston.info("All done!");
 });

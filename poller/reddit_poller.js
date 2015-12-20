@@ -68,7 +68,7 @@ function Poller(options) {
             // if we are unauthenticated, then get a new token first and redo poll
             if (response.statusCode == 401) {
                 winston.info("Access token expired, getting a new one...")
-                self.get_access_token().then(self.poll);
+                self.get_access_token().then(self.poll).then(deferred.resolve);
             }
             else if (response.statusCode == 200) {
                 // Unfortunately, mongoose doesn't support bulk save yet, so we'll need to save the posts one by one:
@@ -83,8 +83,8 @@ function Poller(options) {
                             winston.warn("Failed saving post: [%s] %s", post.data.title, post.data.title);
                         }
                         if (savedCount == body.data.children.length) {
+                            winston.info("Saved posts to DB.");
                             deferred.resolve();
-                            winston.info("Saved posts to DB.")
                         }
                     });
                 });
