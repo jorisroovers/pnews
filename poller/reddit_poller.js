@@ -50,6 +50,7 @@ function Poller(options) {
 
     // Polls /r/programming for the top stories
     self.poll = function () {
+        var deferred = Q.defer();
         winston.info("Polling reddit for latest programming news...")
         var options = {
             'url': URLS.reddit.r_programming_top,
@@ -82,6 +83,7 @@ function Poller(options) {
                             winston.warn("Failed saving post: [%s] %s", post.data.title, post.data.title);
                         }
                         if (savedCount == body.data.children.length) {
+                            deferred.resolve();
                             winston.info("Saved posts to DB.")
                         }
                     });
@@ -91,6 +93,7 @@ function Poller(options) {
                 winston.warn("Unexpected response:", response.statusCode);
             }
         });
+        return deferred.promise;
     };
 
     self.init = function () {
