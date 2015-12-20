@@ -4,6 +4,10 @@ var express = require('express'),
     winston = require('winston'),
     exphbs = require('express-handlebars');
 
+// Add timestamp to logs
+// http://stackoverflow.com/questions/10271373/how-can-i-add-timestamp-to-logs-using-node-js-library-winston
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {'timestamp': true});
 
 var app = express();
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
