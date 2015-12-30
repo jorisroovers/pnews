@@ -13,10 +13,8 @@ The Architecture of pnews is based on a number of microservices (actually, "nano
 - pnews-poller: polls news from reddit
 
 The services interact with each other as follows:
-```
-pnews-web <=  mongo-db  <= pnews-poller <= reddit
-```
 
+![pnews architecture](docs/architecture.png)
 
 # Why? #
 
