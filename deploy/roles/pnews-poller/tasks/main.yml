@@ -30,3 +30,9 @@
 - name: "Adding cron job for pnews-poller-hackernews.sh"
   cron: name="pnews-poller-hackernews" minute="*/1"
         user={{pnews_user}} job="{{pnews_dir}}/pnews-poller-hackernews.sh >> {{pnews_poller_hackernews_log}} 2>&1"
+
+- name: "Creating logrotate config"
+  template: src=logrotate-pnews-poller.conf dest="{{logrotate_config_dir}}/{{item.conffile}}"
+            owner=root group=root
+  with_items:
+    - {conffile: "pnews-poller",  logfile: "{{pnews_poller_log_dir}}/*.log" }

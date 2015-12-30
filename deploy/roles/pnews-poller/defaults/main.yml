@@ -11,3 +11,5 @@ pnews_poller_reddit_username: ""
 pnews_poller_reddit_password: ""
 pnews_poller_reddit_app_id: ""
 pnews_poller_reddit_app_token: ""
+
+logrotate_config_dir: "/etc/logrotate.d"

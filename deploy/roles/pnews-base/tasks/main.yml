@@ -12,6 +12,7 @@
     - python-setuptools # Installs easy_install
     - vim
     - silversearcher-ag
+    - logrotate
 
 - name: "Installing pip"
   easy_install: name=pip
