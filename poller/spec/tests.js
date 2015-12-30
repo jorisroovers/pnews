@@ -1,4 +1,4 @@
-var poller = require('../poller'),
+var poller = require('../reddit_poller'),
     request = require('request'),
     nock = require('nock'),
     winston = require('winston');

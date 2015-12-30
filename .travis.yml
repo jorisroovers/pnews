@@ -4,6 +4,8 @@ node_js:
 before_script:
   - npm install -g gulp
 install:
-  - "npm install poller/"
-  - "npm install web/"
+  - "cd poller/; npm install; cd .."
+  - "cd web/; npm install; cd .."
+before_script:
+  - "npm install -g gulp"
 script: "gulp --gulpfile poller/gulpfile.js test"
