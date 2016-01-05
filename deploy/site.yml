@@ -1,4 +1,15 @@
 ---
+# Extra check to make sure that we have set some important variables for our target environment
+- hosts: pnews-poller
+  tasks:
+    - name: "Assert that important deployment variables are set"
+      assert:
+        that:
+          - "pnews_poller_reddit_username is defined and pnews_poller_reddit_username != ''"
+          - "pnews_poller_reddit_password is defined and pnews_poller_reddit_password != ''"
+          - "pnews_poller_reddit_app_id is defined and pnews_poller_reddit_app_id != ''"
+          - "pnews_poller_reddit_app_token is defined and pnews_poller_reddit_app_token != ''"
+
 - hosts: pnews-web
   roles:
    - pnews-web
